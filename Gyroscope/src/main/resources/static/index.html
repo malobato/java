@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+
+		<title>Device orientation websocket demo</title>
+
+		<script type="text/javascript" src="webjars/sockjs-client/1.1.1/sockjs.min.js"></script>
+		<script type="text/javascript" src="webjars/stomp-websocket/2.3.4/lib/stomp.min.js"></script>
+	</head>
+
+	<body>
+
+		<label for="alpha">Alpha</label>
+		<input type="text" name="alpha" id="alpha">
+		<label for="beta">Beta</label>
+		<input type="text" name="beta" id="beta">
+		<label for="gamma">Gamma</label>
+		<input type="text" name="gamma" id="gamma">
+	
+		<script type="text/javascript">
+			
+			var alpha = document.getElementById( 'alpha' );
+			var beta = document.getElementById( 'beta' );
+			var gamma = document.getElementById( 'gamma' );
+	
+			var socket = new SockJS( '/gyroscope' );
+	
+			var stompClient = Stomp.over( socket );
+	
+			// Empty headers (login, password, client) and the connection callback
+			stompClient.connect( {}, function( frame ) {
+	
+				stompClient.subscribe( '/topic/motion', function ( motion ) {
+	
+					var message = JSON.parse( motion.body );
+					
+					alpha.value = message.alpha;
+					beta.value = message.beta;
+					gamma.value = message.gamma;			
+				} );
+			} );
+	
+		</script>
+	
+	</body>
+</html>

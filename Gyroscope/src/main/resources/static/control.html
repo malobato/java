@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Device Control orientation websocket demo</title>
+		
+		<script type="text/javascript" src="webjars/sockjs-client/1.1.1/sockjs.min.js"></script>
+		<script type="text/javascript" src="webjars/stomp-websocket/2.3.4/lib/stomp.min.js"></script>
+	</head>
+
+	<body>
+
+		<label for="alpha">Alpha</label>
+		<input type="text" name="alpha" id="alpha">
+		<label for="beta">Beta</label>
+		<input type="text" name="beta" id="beta">
+		<label for="gamma">Gamma</label>
+		<input type="text" name="gamma" id="gamma">
+
+		<script type="text/javascript">
+		
+			var alpha = document.getElementById( 'alpha' );
+			var beta = document.getElementById( 'beta' );
+			var gamma = document.getElementById( 'gamma' );
+	
+			var socket = new SockJS( '/gyroscope' );
+	
+			var stompClient = Stomp.over( socket );
+	
+			// Empty headers (login, password, client) and the connection callback
+			stompClient.connect( {}, function( frame ) {
+	
+			} );
+
+			// The Chrome way
+			if ( window.DeviceOrientationEvent ) {
+	
+				window.addEventListener( 'deviceorientation', function ( event ) {
+	
+					alpha.value = Math.round( event.alpha );
+					beta.value = Math.round( event.beta );
+					gamma.value = Math.round( event.gamma );
+	
+					// Send a message with empty headers
+					stompClient.send( '/app/motion', {}, JSON.stringify( {'alpha' : alpha.value, 'beta' : beta.value, 'gamma' : gamma.value } ) );
+				} );
+			}
+			else {
+	
+				document.write( "Has your device a gyroscope?" );
+			}
+			
+		</script>
+
+	</body>
+</html>
