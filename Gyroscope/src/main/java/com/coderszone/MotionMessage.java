@@ -3,9 +3,9 @@ package com.coderszone;
 
 public class MotionMessage {
 
-	private int alpha;
-	private int beta;
-	private int gamma;
+	private float alpha;
+	private float beta;
+	private float gamma;
 
 
 	public MotionMessage() {
@@ -16,7 +16,7 @@ public class MotionMessage {
 	}
 
 
-	public MotionMessage( int alpha, int beta, int gamma ) {
+	public MotionMessage( float alpha, float beta, float gamma ) {
 
 		this.alpha = alpha;
 		this.beta = beta;
@@ -24,37 +24,37 @@ public class MotionMessage {
 	}
 
 
-	public int getAlpha() {
+	public float getAlpha() {
 
 		return alpha;
 	}
 
 
-	public void setAlpha( int alpha ) {
+	public void setAlpha( float alpha ) {
 
 		this.alpha = alpha;
 	}
 
 
-	public int getBeta() {
+	public float getBeta() {
 
 		return beta;
 	}
 
 
-	public void setBeta( int beta ) {
+	public void setBeta( float beta ) {
 
 		this.beta = beta;
 	}
 
 
-	public int getGamma() {
+	public float getGamma() {
 
 		return gamma;
 	}
 
 
-	public void setGamma( int gamma ) {
+	public void setGamma( float gamma ) {
 
 		this.gamma = gamma;
 	}

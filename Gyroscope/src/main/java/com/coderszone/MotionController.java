@@ -13,6 +13,8 @@ public class MotionController {
 	@SendTo( "/topic/motion" )
 	public MotionMessage motion( MotionMessage motionMessage ) throws Exception {
 
+		// Do some stuff with the message
+		
 		return motionMessage;
 	}
 }

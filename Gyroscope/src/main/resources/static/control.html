@@ -36,9 +36,9 @@
 	
 				window.addEventListener( 'deviceorientation', function ( event ) {
 	
-					alpha.value = Math.round( event.alpha );
-					beta.value = Math.round( event.beta );
-					gamma.value = Math.round( event.gamma );
+					alpha.value = event.alpha; // Math.round( event.alpha );
+					beta.value = event.beta; // Math.round( event.beta );
+					gamma.value = event.gamma; // Math.round( event.gamma );
 	
 					// Send a message with empty headers
 					stompClient.send( '/app/motion', {}, JSON.stringify( {'alpha' : alpha.value, 'beta' : beta.value, 'gamma' : gamma.value } ) );
