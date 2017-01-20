@@ -1,26 +1,38 @@
 package application;
 
 
+import java.io.IOException;
+import java.util.logging.Logger;
+
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 
 public class Main extends Application {
 
+	private static final Logger LOGGER = Logger.getLogger( Main.class.getName() );
+
+
 	@Override
 	public void start( Stage primaryStage ) {
 
 		try {
-			BorderPane root = new BorderPane();
-			Scene scene = new Scene( root, 400, 400 );
-			scene.getStylesheets().add( getClass().getResource( "application.css" ).toExternalForm() );
-			primaryStage.setScene( scene );
+			
+			Parent root = FXMLLoader.load( getClass().getClassLoader().getResource( "resources/screen.fxml" ) );
+			
+			primaryStage.setTitle( "JavaFX simple example" );
+			primaryStage.setResizable( false );
+			
+			primaryStage.setScene( new Scene( root ) );
+			
 			primaryStage.show();
 		}
-		catch ( Exception e ) {
-			e.printStackTrace();
+		catch ( IOException ioException ) {
+
+			LOGGER.severe( "I cannot load the application form" + ioException );
 		}
 	}
 
