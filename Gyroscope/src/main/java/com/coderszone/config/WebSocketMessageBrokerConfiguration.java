@@ -1,4 +1,4 @@
-package com.coderszone;
+package com.coderszone.config;
 
 
 import org.springframework.context.annotation.Configuration;
